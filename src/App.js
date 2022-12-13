@@ -1,12 +1,8 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import translate from "translate";
+
 function App() {
   const [word, setWord] = useState("");
-
-  translate.engine = "yandex";
-  translate.key =
-    "dict.1.1.20221212T083701Z.c2bbe382da8f77b4.f64d3eb19797d69dee83980d8babb9c06ec8bfb9";
 
   const fetchData = useCallback(async () => {
     const response = await fetch(`https://random-word-api.herokuapp.com/word`);
