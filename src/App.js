@@ -1,18 +1,18 @@
 import "./App.css";
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 
 function App() {
   const [word, setWord] = useState("");
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async () => {
     const response = await fetch(`https://random-word-api.herokuapp.com/word`);
     const newData = await response.json();
     console.log(newData);
     defention(newData[0]);
     setWord(newData[0]);
-  }, []);
+  };
 
-  const defention = useCallback(async () => {
+  const defention = async () => {
     console.log("dev");
     fetch("https://developers.lingvolive.com/api/v1/authenticate", {
       // fetch('https://developers.lingvolive.com/api/v1/Translation', {
@@ -28,20 +28,17 @@ function App() {
     }).then((response) => {
       console.log(response.json());
       response.json();
-    });
-  }, [word]);
+    })};
 
-  useEffect(() => {
-    fetchData();
-    defention(word);
-  }, []);
 
   return (
     <div className="App">
       <header className="App-header">
         {word}
-        <div>
-          <button onClick={() => fetchData()}>Next word</button>
+        <div> {word.length === 0 ?
+                  <button onClick={() => fetchData()}>Start training</button>: 
+                  <button onClick={() => fetchData()}>Next word</button> }
+
         </div>
       </header>
     </div>
